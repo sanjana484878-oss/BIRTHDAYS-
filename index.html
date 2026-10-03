@@ -345,7 +345,7 @@ var CFG={
   ],
   gallery:[{p:"Our engagement day.jpeg",c:"Our engagement day 💍"},{p:"Just us.jpeg",c:"Just us ❤️"},{p:"Caught being cute.jpeg",c:"Caught being cute 😊"},{p:"Better Together.jpeg",c:"Better Together 💕"},{p:"Husband & Wife.jpeg",c:"Husband & Wife 👫"}],
 
-  love:["Scanning for romantic energy...","Error 404: Food required to proceed.","Recalculating... (Did you say I look pretty today?)","Love level: 9999% (Okay fine, I love you lots.)"],
+  love:["Scanning... ERROR: No romantic bone found. 📉","Recalculating... wait, did you steal my snacks today? 🤨","Checking wallet size instead... 💰","Love level: 9999% (You're lucky I love you). 🥰"],
   letter:"My dearest ❤️,\n\nEvery moment I have spent with you is the greatest gift of my life. You make the whole world feel kinder just by being in it.\n\nHappy Birthday, my heart 🥰. I love you more than words can say.\n\nForever yours, Sanjana 💕",
   final:"Here is to our next chapter together. Happy Birthday, my everything 🌹💑 I love you to the moon and back!"
 };
@@ -412,7 +412,21 @@ $("bal").appendChild(b);
 CFG.gallery.forEach(function(g){var d=document.createElement("div");d.className="ph";
   d.innerHTML='<div class="img">'+(g.p?'<img src="'+g.p+'" alt="'+g.c+'">':"Your photo here")+"</div><p>"+g.c+"</p>";$("gal").appendChild(d)});
 
-var li=0;$("lv").onclick=function(){$("lvt").textContent=CFG.love[li%CFG.love.length];$("mt").style.transform="scale("+(1+(li%4)*.18)+")";li++;pop(10)};
+var li=0;
+$("lv").onclick=function(){
+  if(li < 3) {
+    $("lvt").textContent=CFG.love[li];
+    $("mt").style.transform="scale("+(1+li*.2)+")";
+    pop(10);
+  } else if(li === 3) {
+    $("lvt").textContent=CFG.love[li];
+    $("mt").innerHTML="<img src='Husband & Wife.jpeg' style='width:160px;height:160px;object-fit:cover;border-radius:50%;border:4px solid var(--rose);animation:popIn 0.6s;box-shadow:0 8px 20px rgba(0,0,0,0.3)'>";
+    $("mt").style.transform="scale(1.1)";
+    $("lv").style.display="none"; // Hide button after final reveal
+    if(typeof blastCelebration==="function") blastCelebration();
+  }
+  li++;
+};
 $("env").onclick=function(){$("env").style.display="none";var l=$("let");l.textContent=CFG.letter;l.style.display="block"};
 /* ===== CAKE MULTI-STEP ===== */
 var cakeStep=0;
