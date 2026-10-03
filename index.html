@@ -356,7 +356,12 @@ $("title").textContent="Happy Birthday, "+CFG.him;
 var H=$("hearts");
 for(var k=0;k<14;k++){var s=document.createElement("i");s.style.left=Math.random()*100+"%";var z=14+Math.random()*22;
   s.style.width=s.style.height=z+"px";s.style.animationDuration=9+Math.random()*10+"s";s.style.animationDelay=-Math.random()*14+"s";H.appendChild(s)}
-function go(){if($("code").value===CFG.code){$("lock").style.display="none";window.scrollTo(0,0);showNav();pop(20);var f=$("fill");setTimeout(function(){f.style.width="99%"},100);
+function go(){if($("code").value===CFG.code){
+  $("code").blur();
+  $("lock").style.display="none";
+  setTimeout(function(){window.scrollTo(0,0);}, 50);
+  setTimeout(function(){window.scrollTo(0,0);}, 300);
+  showNav();pop(20);var f=$("fill");setTimeout(function(){f.style.width="99%"},100);
   var n=0,t=setInterval(function(){n+=3;$("pc").textContent=Math.min(n,99)+"%";if(n>=99)clearInterval(t)},80);
   setTimeout(function(){var mus=$("bgmusic");mus.volume=0.4;mus.play().catch(function(){});$("muteBtn").style.display="flex";},800);}
   else $("err").textContent="Wrong code! 😅 Did you seriously forget your own birthday? 🔪"}
