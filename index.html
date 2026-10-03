@@ -582,7 +582,9 @@ $("un").onclick=function(){
     var synth = window.speechSynthesis;
     // Attempt to pick a nice female voice if available
     var voices = synth.getVoices();
-    var voice = voices.find(function(v){ return v.name.includes("Female") || v.name.includes("Zira") || v.name.includes("Google UK English Female") }) || voices[0];
+    var voice = voices.find(function(v){ 
+      return v.name.includes("Samantha") || v.name.includes("Google US English") || v.name.includes("Google UK English Female") || v.name.includes("Zira") || v.name.includes("Female"); 
+    }) || voices[0];
     
     var idx = 0;
     function speakNext() {
@@ -595,7 +597,10 @@ $("un").onclick=function(){
       
       var utter = new SpeechSynthesisUtterance(newsScript[idx].t);
       if(voice) utter.voice = voice;
-      utter.rate = 0.9;
+      
+      // Make it sound young and soft
+      utter.pitch = 1.25; 
+      utter.rate = 0.85; 
       
       $("tv-subs").textContent = newsScript[idx].t;
       $("tv-subs").style.display = "block";
