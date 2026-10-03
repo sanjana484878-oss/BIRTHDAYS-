@@ -123,7 +123,7 @@ svg{display:block;margin:auto}
 .nbub:hover .nbub-pill{background:var(--rose);color:#fff;transform:scale(1.06)}
 .nbub-heart{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#c9475f,#8d2646);display:grid;place-items:center;font-size:1.2rem;box-shadow:0 4px 12px #c9475f66;flex-shrink:0}
 </style></head><body>
-<audio id="bgmusic" src="back ground music.mp4" loop preload="auto"></audio>
+<audio id="bgmusic" src="Background_music.mp3" loop preload="auto"></audio>
 <button id="muteBtn" aria-label="Mute music" style="display:none;position:fixed;bottom:24px;left:24px;z-index:999;width:48px;height:48px;border-radius:50%;padding:0;font-size:1.4rem;background:linear-gradient(135deg,#6e1f3a,#c9475f);box-shadow:0 4px 14px #6e1f3a88;align-items:center;justify-content:center;">🎵</button>
 <div class="hearts" id="hearts" aria-hidden="true"></div>
 
@@ -612,7 +612,7 @@ sections.forEach(function(sec, i) {
 /* Mute button toggle */
 $("muteBtn").onclick = function(){
   var mus=$("bgmusic");
-  mus.muted=!mus.muted;
-  $("muteBtn").innerHTML=mus.muted?"🔇":"🎵";
+  if(mus.paused) { mus.play(); } else { mus.pause(); }
+  $("muteBtn").innerHTML=mus.paused?"🔇":"🎵";
 };
 </script></body></html>
