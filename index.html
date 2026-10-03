@@ -515,10 +515,6 @@ var C2={
 C2.videos.forEach(function(v){var d=document.createElement("div");d.className="card";
  d.innerHTML='<div class="vid">'+(v.src?'<video controls playsinline preload="none" poster="'+v.poster+'" src="'+v.src+'"></video>':"Your video here")+"</div><p style='margin:10px 0 0;color:var(--wine);font-weight:700'>"+v.c+"</p>";$("vd").appendChild(d)});
 
-$("st").textContent=C2.song.title;$("sa").textContent=C2.song.artist;
-$("pl").onclick=function(){var a=$("au");if(!C2.song.src){$("sa").textContent="Add your song file to play it here";return}
- if(!a.src)a.src=C2.song.src;if(a.paused){a.play();$("ds").classList.add("spin");$("pl").textContent="Pause"}else{a.pause();$("ds").classList.remove("spin");$("pl").textContent="Play"}};
-
 
 
 /* ===== QUESTION MULTI-STEP ===== */
