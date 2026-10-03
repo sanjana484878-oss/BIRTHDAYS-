@@ -376,6 +376,12 @@ svg{display:block;margin:auto}
 </div></section>
 
 <script>
+var globalVoices = [];
+function loadAllVoices() { globalVoices = window.speechSynthesis.getVoices(); }
+loadAllVoices();
+if (window.speechSynthesis.onvoiceschanged !== undefined) {
+  window.speechSynthesis.onvoiceschanged = loadAllVoices;
+}
 /* ===== EDIT THIS PART ===== */
 var CFG={
   her:"Sanjana", him:"My Love 💕", code:"1810",
@@ -580,7 +586,7 @@ $("un").onclick=function(){
     anchorImg.style.animation = "talkBounce 0.3s infinite";
     
     var synth = window.speechSynthesis;
-    var voices = synth.getVoices();
+    var voices = globalVoices.length > 0 ? globalVoices : synth.getVoices();
     
     // Priority 1: Known soft female voices on iOS, Windows, Mac
     var voice = voices.find(function(v){ return v.name.includes("Samantha") || v.name.includes("Victoria") || v.name.includes("Karen") || v.name.includes("Zira") || v.name.includes("Google UK English Female"); });
