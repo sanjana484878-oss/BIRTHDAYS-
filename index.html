@@ -171,8 +171,7 @@ svg{display:block;margin:auto}
 
 <section class="alt" id="s-balloons"><div class="in">
   <h2>Memory balloons</h2>
-  <p>👆 Type a question (like "Will you marry me?") then tap the balloon to pop it! 🎈</p>
-  <input id="balloon-q" placeholder="Type your question here..." style="width:100%;padding:12px;margin-bottom:20px;border-radius:12px;border:none;font-size:1.1rem;color:#6e1f3a;text-align:center">
+  <p>👆 Tap a balloon below to pop it! 🎈 No refunds if you cry. (I already have screenshots of your ugly crying face anyway.)</p>
   <div class="bal" id="bal"></div>
   <div class="card" id="mem" style="display:none"></div>
 </div></section>
@@ -373,14 +372,6 @@ b.style.setProperty("--c", "#c9475f");
 b.setAttribute("aria-label","Pop memory");
 b.onclick=function(){
   b.style.display="none"; 
-  var q = $("balloon-q") ? $("balloon-q").value.toLowerCase() : "";
-  if(q.includes("love") || q.includes("marry")){
-    var stk = document.createElement("div");
-    stk.innerHTML = "<div style='font-size:3.5rem;background:#fff;padding:30px;border-radius:30px;box-shadow:0 10px 40px rgba(0,0,0,0.3);color:var(--rose);font-family:Dancing Script,cursive;animation:popIn 0.8s;border:4px solid var(--gold)'>YES! A thousand times YES! 💍💖</div>";
-    stk.style.position="fixed";stk.style.top="50%";stk.style.left="50%";stk.style.transform="translate(-50%,-50%)";stk.style.zIndex="9999";stk.style.width="90%";stk.style.textAlign="center";
-    document.body.appendChild(stk);
-    setTimeout(function(){stk.style.opacity="0";stk.style.transition="1s";setTimeout(function(){stk.remove()},1000)}, 5000);
-  }
   var tags=["I love you ❤️","I miss you 🥺","I kiss you 😘","You're my everything 💖","My forever ✨"];
   var emojis=["🎉","💕","✨","🎈","🌹","💖","🥳","🎁","🌸","💝","🥰","🫶"];
   for(var i=0; i<15; i++) {
