@@ -217,7 +217,9 @@ svg{display:block;margin:auto}
 <section id="s-movie"><div class="in">
   <h2>A Little Movie of Us</h2>
   <p>▶️ Tap play below! 🎥 Sanjana made this one for you. (Prepare tissues.)</p>
-  <div class="vid" id="vd">Your video goes here</div>
+  <div class="vid" id="vd">
+    <video controls playsinline preload="metadata" src="movie_video.mp4" style="width:100%;height:100%;object-fit:cover;"></video>
+  </div>
 </div></section>
 
 <section class="alt" id="s-promises"><div class="in">
@@ -546,22 +548,7 @@ PM.forEach(function(t){var d=document.createElement("div");d.className="card rea
 var FT=[["Our beautiful life ❤️","My dream is to live happily together, creating countless cute little moments, laughing over silly things, holding each other through every chapter, and making beautiful memories together ❤️"],["Trip to Switzerland 🏔️","A dream trip to Switzerland."],["Our own house 🏡","Buy our own dream house."]],fo=document.createElement("div");
 fo.className="card";$("ft2").appendChild(fo);
 FT.forEach(function(t,i){var b=document.createElement("button");b.textContent="Dream "+(i+1);b.onclick=function(){fo.style.display="block";fo.innerHTML="<b>"+t[0]+"</b><br>"+t[1];pop(10)};$("ft2").insertBefore(b,fo)});
-/* Video: put your file in VIDEO, for example "video.mp4". Leave empty to hide the placeholder. */
-var VIDEO="";if(VIDEO){$("vd").innerHTML='<video controls playsinline src="'+VIDEO+'"></video>'}
-
-/* ===== EDIT MORE CONTENT HERE ===== */
- var C2={
-  videos:[{c:"A Little Movie of Us ❤️",src:"movie_video.mp4",poster:""}],
- jokes:[{a:"👉 Your nickname for each other",b:"Tap to find out what it REALLY means and how it started (it's embarrassing for both of us)."},{a:"😂 His famous phrase",b:"The thing he always says that makes her snort-laugh every single time without fail."},{a:"🍕 Our emergency code word",b:"The word that means 'I need food RIGHT NOW and this is a level-5 emergency'."}],
- song:{title:"Our favorite song",artist:"Artist name",src:""},
- wishes:[{n:"His mother 💐",t:"Happy birthday, my dear son. Stay happy always. We love you! 🥰"},{n:"His best friend 🤝",t:"Happy birthday, brother. You found the best one. Lucky you! 😄"},{n:"Her family 🌺",t:"Welcome to the family. Happy birthday, our dear one! 💕"}],
- promises:["I promise to always pretend your jokes are funny.","I promise to support you, even when you're wrong (which is often).","I promise to let you have the last slice of pizza. Sometimes.","I promise to choose you every day, even when I'm hangry."],
- future:[{a:"Our first trip",b:"Add the place you want to visit together."},{a:"Our home",b:"Add the dream home or city you both want."},{a:"Our big day",b:"Add your wedding plans or date."}]
-};
 /* ================================== */
-
-C2.videos.forEach(function(v){var d=document.createElement("div");d.className="card";
- d.innerHTML='<div class="vid">'+(v.src?'<video controls playsinline preload="none" poster="'+v.poster+'" src="'+v.src+'"></video>':"Your video here")+"</div><p style='margin:10px 0 0;color:var(--wine);font-weight:700'>"+v.c+"</p>";$("vd").appendChild(d)});
 
 
 
