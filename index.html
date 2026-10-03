@@ -139,8 +139,7 @@ svg{display:block;margin:auto}
   <a class="nbub" href="#s-movie" onclick="closeNav()"><span class="nbub-pill">🎥 Our Movie</span><span class="nbub-heart">🎥</span></a>
   <a class="nbub" href="#s-promises" onclick="closeNav()"><span class="nbub-pill">🤝 Promises</span><span class="nbub-heart">🤝</span></a>
   <a class="nbub" href="#s-letter" onclick="closeNav()"><span class="nbub-pill">💌 Love Letter</span><span class="nbub-heart">💌</span></a>
-
-
+  <a class="nbub" href="#s-question" onclick="closeNav()"><span class="nbub-pill">💍 One Question</span><span class="nbub-heart">💍</span></a>
   <a class="nbub" href="#s-cake" onclick="closeNav()"><span class="nbub-pill">🎂 Blow the Cake</span><span class="nbub-heart">🎂</span></a>
   <a class="nbub" href="#s-future" onclick="closeNav()"><span class="nbub-pill">🌹 Our Future</span><span class="nbub-heart">🌹</span></a>
   <a class="nbub" href="#s-surprise" onclick="closeNav()"><span class="nbub-pill">🎁 Last Surprise</span><span class="nbub-heart">🎁</span></a>
@@ -172,7 +171,8 @@ svg{display:block;margin:auto}
 
 <section class="alt" id="s-balloons"><div class="in">
   <h2>Memory balloons</h2>
-  <p>👆 Tap a balloon below to pop it! 🎈 No refunds if you cry. (I already have screenshots of your ugly crying face anyway.)</p>
+  <p>👆 Type a question (like "Will you marry me?") then tap the balloon to pop it! 🎈</p>
+  <input id="balloon-q" placeholder="Type your question here..." style="width:100%;padding:12px;margin-bottom:20px;border-radius:12px;border:none;font-size:1.1rem;color:#6e1f3a;text-align:center">
   <div class="bal" id="bal"></div>
   <div class="card" id="mem" style="display:none"></div>
 </div></section>
@@ -230,7 +230,24 @@ svg{display:block;margin:auto}
   <div class="card letter" id="let"></div>
 </div></section>
 
-
+<section id="s-question"><div class="in">
+  <h2>The Most Important Question</h2>
+  <p>Answer honestly. Your life depends on it. 🔪</p>
+  <div class="card" style="padding:40px 20px;text-align:center;min-height:220px;position:relative;overflow:hidden">
+    <h3 style="margin-top:0">Will you marry me & love me forever?</h3>
+    <div style="position:relative;height:120px;margin-top:30px;transition:0.3s" id="q-area">
+      <button id="btn-yes" style="position:absolute;left:15%;top:30px;background:var(--rose);z-index:10;font-size:1.3rem">Yes 😍</button>
+      <button id="btn-no" style="position:absolute;left:55%;top:30px;background:#888;z-index:5;font-size:1.3rem;transition:0.1s">No 😒</button>
+    </div>
+    <div id="q-ans" style="display:none;margin-top:20px;animation:popIn 0.5s">
+      <div style="font-size:4.5rem;animation:beat 1s infinite">💖</div>
+      <h3 style="color:var(--rose);font-family:'Dancing Script',cursive;font-size:2.8rem;margin:10px 0">I Love You! 🥰</h3>
+      <div style="background:var(--card);padding:10px;border-radius:20px;border:2px solid var(--rose);display:inline-block">
+        <p style="color:var(--wine);font-weight:900;font-size:1.5rem;margin:0">Sanjana & My Love ✨</p>
+      </div>
+    </div>
+  </div>
+</div></section>
 
 <section class="alt" id="s-cake"><div class="in">
   <h2>🎂 Make a Wish</h2>
@@ -356,6 +373,14 @@ b.style.setProperty("--c", "#c9475f");
 b.setAttribute("aria-label","Pop memory");
 b.onclick=function(){
   b.style.display="none"; 
+  var q = $("balloon-q") ? $("balloon-q").value.toLowerCase() : "";
+  if(q.includes("love") || q.includes("marry")){
+    var stk = document.createElement("div");
+    stk.innerHTML = "<div style='font-size:3.5rem;background:#fff;padding:30px;border-radius:30px;box-shadow:0 10px 40px rgba(0,0,0,0.3);color:var(--rose);font-family:Dancing Script,cursive;animation:popIn 0.8s;border:4px solid var(--gold)'>YES! A thousand times YES! 💍💖</div>";
+    stk.style.position="fixed";stk.style.top="50%";stk.style.left="50%";stk.style.transform="translate(-50%,-50%)";stk.style.zIndex="9999";stk.style.width="90%";stk.style.textAlign="center";
+    document.body.appendChild(stk);
+    setTimeout(function(){stk.style.opacity="0";stk.style.transition="1s";setTimeout(function(){stk.remove()},1000)}, 5000);
+  }
   var tags=["I love you ❤️","I miss you 🥺","I kiss you 😘","You're my everything 💖","My forever ✨"];
   var emojis=["🎉","💕","✨","🎈","🌹","💖","🥳","🎁","🌸","💝","🥰","🫶"];
   for(var i=0; i<15; i++) {
@@ -504,6 +529,32 @@ $("pl").onclick=function(){var a=$("au");if(!C2.song.src){$("sa").textContent="A
  if(!a.src)a.src=C2.song.src;if(a.paused){a.play();$("ds").classList.add("spin");$("pl").textContent="Pause"}else{a.pause();$("ds").classList.remove("spin");$("pl").textContent="Play"}};
 
 
+
+/* ===== QUESTION MULTI-STEP ===== */
+var btnNo=$("btn-no");
+function dodgeNo(){
+  var a=$("q-area");
+  var w=a.clientWidth-btnNo.clientWidth;
+  var h=a.clientHeight-btnNo.clientHeight;
+  var newX=Math.max(0,Math.min(w, Math.random()*w));
+  var newY=Math.max(0,Math.min(h, Math.random()*h));
+  btnNo.style.left=newX+"px";
+  btnNo.style.top=newY+"px";
+}
+if(btnNo){
+  btnNo.onmouseover=dodgeNo;
+  btnNo.ontouchstart=function(e){e.preventDefault();dodgeNo();};
+  btnNo.onclick=dodgeNo;
+}
+var btnYes=$("btn-yes");
+if(btnYes){
+  btnYes.onclick=function(){
+    $("q-area").style.display="none";
+    $("q-ans").style.display="block";
+    pop(50);
+    if(typeof blastCelebration==="function") blastCelebration();
+  };
+}
 
 /* Background Images Setup */
 var bgImages = [
