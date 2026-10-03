@@ -378,9 +378,17 @@ b.style.setProperty("--c", "#c9475f");
 b.setAttribute("aria-label","Pop memory");
 b.onclick=function(){
   b.style.display="none"; 
-  var tags=["I love you ❤️","I miss you 🥺","I kiss you 😘","You're my everything 💖","My forever ✨"];
+  var tags=[
+    "I love you ❤️","I miss you 🥺","I love you forever ♾️","I kiss you 😘",
+    "You're my everything 💖","My forever ✨","My favorite memory is you 🥰",
+    "Best husband ever 👑","You make me smile 😊","Can't stop thinking about you 💭",
+    "You are my happy place 🏡","My partner in crime 🕵️‍♀️","Always yours 💞",
+    "You stole my heart 💘","Every day with you is a gift 🎁","My soulmate 💑",
+    "Love of my life 💍","I'm so lucky to have you 🍀","You're my dream come true 🌙",
+    "Missing your hugs 🤗"
+  ];
   var emojis=["🎉","💕","✨","🎈","🌹","💖","🥳","🎁","🌸","💝","🥰","🫶"];
-  for(var i=0; i<15; i++) {
+  for(var i=0; i<25; i++) {
     setTimeout(function(){
       var t=document.createElement("div");
       t.className="blast-em";
