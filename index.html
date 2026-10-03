@@ -123,7 +123,7 @@ svg{display:block;margin:auto}
 .nbub:hover .nbub-pill{background:var(--rose);color:#fff;transform:scale(1.06)}
 .nbub-heart{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#c9475f,#8d2646);display:grid;place-items:center;font-size:1.2rem;box-shadow:0 4px 12px #c9475f66;flex-shrink:0}
 @keyframes flashLive { 0%,100%{opacity:1} 50%{opacity:0.2} }
-@keyframes scrollTicker { 0%{transform:translateX(100%)} 100%{transform:translateX(-150%)} }
+@keyframes scrollTicker { 0%{transform:translateX(0)} 100%{transform:translateX(-150vw)} }
 @keyframes talkBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px) scale(1.02)} }
 @keyframes tvEmojiFly { 0%{transform:translateY(0) scale(0.5);opacity:1} 100%{transform:translateY(-150px) scale(2);opacity:0} }
 </style></head><body>
@@ -353,15 +353,15 @@ svg{display:block;margin:auto}
         </div>
         <!-- Boy -->
         <div style="flex:1; position:relative; overflow:hidden;">
-          <img src="Your birthday - Copy.jpeg" style="width:100%; height:100%; object-fit:cover;">
+          <img src="Your_birthday_copy.jpeg" style="width:100%; height:100%; object-fit:cover;">
           <div style="position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,0.7); color:#fff; padding:3px 8px; font-size:0.75rem; border-radius:4px; font-weight:bold; font-family:sans-serif;">Birthday Boy</div>
         </div>
       </div>
       
       <!-- Scrolling Ticker -->
       <div style="position:absolute; bottom:0; left:0; right:0; height:45px; background:var(--rose); display:flex; align-items:center; overflow:hidden;">
-        <div style="background:#222; color:#fff; padding:0 12px; height:100%; display:flex; align-items:center; font-weight:900; font-family:sans-serif; font-size:0.9rem; z-index:2; border-right:2px solid #fff;">BREAKING</div>
-        <div style="white-space:nowrap; color:#fff; font-weight:700; font-family:sans-serif; font-size:1rem; padding-left:15px; animation:scrollTicker 12s linear infinite;">
+        <div style="background:#222; color:#fff; padding:0 12px; height:100%; display:flex; align-items:center; font-weight:900; font-family:sans-serif; font-size:0.9rem; z-index:2; border-right:2px solid #fff; position:relative;">BREAKING</div>
+        <div style="position:absolute; left:100%; white-space:nowrap; color:#fff; font-weight:700; font-family:sans-serif; font-size:1rem; animation:scrollTicker 12s linear infinite;">
           LOCAL MAN TURNS ONE YEAR OLDER, STILL HANDSOME! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; More details coming in… cake is also involved. 🎂😂
         </div>
       </div>
