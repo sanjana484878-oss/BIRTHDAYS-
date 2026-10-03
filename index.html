@@ -428,9 +428,20 @@ $("lv").onclick=function(){
     
     setTimeout(function(){
       stk.remove();
-      $("mt").innerHTML="<img src='measure_tap4.jpeg' style='width:180px;height:180px;object-fit:cover;border-radius:50%;border:4px solid var(--rose);animation:popIn 0.6s;box-shadow:0 8px 20px rgba(0,0,0,0.3)'>";
-      $("mt").style.transform="scale(1.1)";
+      
+      var imgStk = document.createElement("div");
+      imgStk.innerHTML = "<img src='measure_tap4.jpeg' style='width:320px;height:320px;object-fit:cover;border-radius:30px;border:6px solid var(--rose);animation:popIn 0.5s;box-shadow:0 10px 40px rgba(0,0,0,0.4)'>";
+      imgStk.style.position="fixed";imgStk.style.top="50%";imgStk.style.left="50%";imgStk.style.transform="translate(-50%,-50%)";imgStk.style.zIndex="9999";imgStk.style.textAlign="center";
+      document.body.appendChild(imgStk);
+      
       if(typeof blastCelebration==="function") blastCelebration();
+      
+      setTimeout(function(){
+        imgStk.style.opacity="0";
+        imgStk.style.transition="0.5s";
+        setTimeout(function(){imgStk.remove();}, 500);
+      }, 1500);
+      
     }, 1500);
   }
   li++;
