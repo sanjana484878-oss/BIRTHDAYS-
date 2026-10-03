@@ -468,11 +468,10 @@ $("cake").onclick=function(){
     $("cake-hint").textContent="🎉 YOU DID IT! Happy Birthday! The cake is RUINED and you are LOVED! 🎂💕";
     $("cake-hint").style.background="rgba(201,71,95,0.2)";
     $("cake-hint").style.color="#f3d9b1";
-    setTimeout(function(){blastCelebration();},600);
+    setTimeout(function(){ $("bday-celebrate").style.display="block"; blastCelebration(); },600);
   }
 };
 function blastCelebration(){
-  $("bday-celebrate").style.display="block";
   var emojis=["🎉","🎊","💕","✨","🌟","⭐","🎈","🌹","💖","🎂","🥳","🎁","🎵","💃","🎶","🌸","💫","🔥","🎀","💝"];
   for(var i=0;i<80;i++){
     (function(idx){
