@@ -122,6 +122,10 @@ svg{display:block;margin:auto}
 .nbub-pill{background:rgba(255,253,251,0.96);color:var(--wine);font-family:'Quicksand',sans-serif;font-weight:700;font-size:.78rem;padding:7px 14px;border-radius:999px;box-shadow:0 4px 14px #3f162433;white-space:nowrap;transition:background .2s,transform .15s}
 .nbub:hover .nbub-pill{background:var(--rose);color:#fff;transform:scale(1.06)}
 .nbub-heart{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#c9475f,#8d2646);display:grid;place-items:center;font-size:1.2rem;box-shadow:0 4px 12px #c9475f66;flex-shrink:0}
+@keyframes flashLive { 0%,100%{opacity:1} 50%{opacity:0.2} }
+@keyframes scrollTicker { 0%{transform:translateX(100%)} 100%{transform:translateX(-150%)} }
+@keyframes talkBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px) scale(1.02)} }
+@keyframes tvEmojiFly { 0%{transform:translateY(0) scale(0.5);opacity:1} 100%{transform:translateY(-150px) scale(2);opacity:0} }
 </style></head><body>
 <audio id="bgmusic" src="Background_music.mp3" loop preload="auto"></audio>
 <button id="muteBtn" aria-label="Mute music" style="display:none;position:fixed;bottom:24px;left:24px;z-index:999;width:48px;height:48px;border-radius:50%;padding:0;font-size:1.4rem;background:linear-gradient(135deg,#6e1f3a,#c9475f);box-shadow:0 4px 14px #6e1f3a88;align-items:center;justify-content:center;">🎵</button>
@@ -335,7 +339,40 @@ svg{display:block;margin:auto}
   <div id="ask"><p>⌨️ Type her name in the box below and click Unlock! 🎁</p>
     <input id="nm" aria-label="Her name" placeholder="Type 'Sanjana' here..."> <button id="un">Unlock</button>
     <p id="e2" style="min-height:1.5em"></p></div>
-  <div id="final"><div class="mono beat"><span>R <b>&amp;</b> S</span></div><p id="ft" style="font-size:1.2rem"></p></div>
+  <div id="final" style="display:none">
+    <div id="tv-frame" style="border:8px solid #222; border-bottom-width:16px; border-radius:12px; overflow:hidden; background:#000; position:relative; aspect-ratio:4/3; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
+      <!-- LIVE badge -->
+      <div style="position:absolute; top:12px; left:12px; background:#e62020; color:#fff; padding:3px 8px; font-weight:900; font-family:sans-serif; border-radius:4px; font-size:0.8rem; z-index:10; animation:flashLive 1.5s infinite; box-shadow:0 0 10px #e62020;">🔴 LIVE</div>
+      
+      <!-- Split Screen -->
+      <div style="display:flex; width:100%; height:calc(100% - 45px);">
+        <!-- Anchor -->
+        <div style="flex:1; border-right:4px solid #222; position:relative; overflow:hidden;">
+          <img id="tv-anchor" src="anchor.jpeg" style="width:100%; height:100%; object-fit:cover;">
+          <div style="position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,0.7); color:#fff; padding:3px 8px; font-size:0.75rem; border-radius:4px; font-weight:bold; font-family:sans-serif;">Anchor Sanjana</div>
+        </div>
+        <!-- Boy -->
+        <div style="flex:1; position:relative; overflow:hidden;">
+          <img src="Your birthday - Copy.jpeg" style="width:100%; height:100%; object-fit:cover;">
+          <div style="position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,0.7); color:#fff; padding:3px 8px; font-size:0.75rem; border-radius:4px; font-weight:bold; font-family:sans-serif;">Birthday Boy</div>
+        </div>
+      </div>
+      
+      <!-- Scrolling Ticker -->
+      <div style="position:absolute; bottom:0; left:0; right:0; height:45px; background:var(--rose); display:flex; align-items:center; overflow:hidden;">
+        <div style="background:#222; color:#fff; padding:0 12px; height:100%; display:flex; align-items:center; font-weight:900; font-family:sans-serif; font-size:0.9rem; z-index:2; border-right:2px solid #fff;">BREAKING</div>
+        <div style="white-space:nowrap; color:#fff; font-weight:700; font-family:sans-serif; font-size:1rem; padding-left:15px; animation:scrollTicker 12s linear infinite;">
+          LOCAL MAN TURNS ONE YEAR OLDER, STILL HANDSOME! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; More details coming in… cake is also involved. 🎂😂
+        </div>
+      </div>
+      
+      <!-- Subtitles (Captions just in case voice is low) -->
+      <div id="tv-subs" style="position:absolute; bottom:60px; left:10%; right:10%; text-align:center; background:rgba(0,0,0,0.8); color:yellow; font-family:sans-serif; font-weight:bold; font-size:1.1rem; padding:8px 12px; border-radius:8px; z-index:15; display:none; text-shadow:1px 1px 0 #000;"></div>
+      
+      <!-- Emojis Container -->
+      <div id="tv-emojis" style="position:absolute; inset:0; pointer-events:none; z-index:20; overflow:hidden;"></div>
+    </div>
+  </div>
 </div></section>
 
 <script>
@@ -519,8 +556,84 @@ function blastCelebration(){
     })(b);
   }
 }
-$("un").onclick=function(){if($("nm").value.trim().toLowerCase()===CFG.her.toLowerCase()){$("ask").style.display="none";$("ft").textContent=CFG.final;$("final").style.display="block";pop(50)}
-  else $("e2").textContent="Nope! Hint: she is the one who loves you most"};
+$("un").onclick=function(){
+  if($("nm").value.trim().toLowerCase()===CFG.her.toLowerCase()){
+    $("ask").style.display="none";
+    $("final").style.display="block";
+    pop(50);
+    
+    // Setup News Script
+    var newsScript = [
+      { t: "Good evening, I’m Sanjana, reporting live with some very important news. Today, a very special man has officially completed another year of his life. Yes… it’s his birthday.", e: "🎂" },
+      { t: "We’re still trying to understand how he keeps getting older while somehow looking exactly the same. But honestly… I’m not complaining.", e: "😄" },
+      { t: "We also spoke to people close to him, and they confirmed that he is funny, caring, and extremely good at making one particular girl smile. That girl would be me, by the way.", e: "😂" },
+      { t: "After a very serious investigation, I can confirm that I love this man very, very much. So, unfortunately for him… he’s stuck with me.", e: "😂" },
+      { t: "Happy Birthday, my love. I hope you get everything you wished for today… although I’m pretty sure what you really want is cake and my attention. Luckily for you… you’re getting both.", e: "🎂" },
+      { t: "This is Sanjana, signing off from the birthday scene. Back to you… and happy birthday, handsome.", e: "💋" }
+    ];
+    
+    var bgm = $("bgmusic");
+    var wasPlaying = !bgm.paused;
+    if(wasPlaying) bgm.pause();
+    
+    var anchorImg = $("tv-anchor");
+    anchorImg.style.animation = "talkBounce 0.3s infinite";
+    
+    var synth = window.speechSynthesis;
+    // Attempt to pick a nice female voice if available
+    var voices = synth.getVoices();
+    var voice = voices.find(function(v){ return v.name.includes("Female") || v.name.includes("Zira") || v.name.includes("Google UK English Female") }) || voices[0];
+    
+    var idx = 0;
+    function speakNext() {
+      if(idx >= newsScript.length) {
+        anchorImg.style.animation = "";
+        if(wasPlaying) bgm.play();
+        if(typeof blastCelebration === "function") blastCelebration();
+        return;
+      }
+      
+      var utter = new SpeechSynthesisUtterance(newsScript[idx].t);
+      if(voice) utter.voice = voice;
+      utter.rate = 0.9;
+      
+      $("tv-subs").textContent = newsScript[idx].t;
+      $("tv-subs").style.display = "block";
+      
+      utter.onstart = function() {
+        anchorImg.style.animation = "talkBounce 0.3s infinite";
+        
+        // Blast specific emojis
+        var c = $("tv-emojis");
+        for(var i=0; i<8; i++) {
+          var d = document.createElement("div");
+          d.textContent = newsScript[idx].e;
+          d.style.position = "absolute";
+          d.style.fontSize = "2.5rem";
+          d.style.left = (Math.random()*80 + 10) + "%";
+          d.style.bottom = "-50px";
+          d.style.animation = "tvEmojiFly " + (1.5+Math.random()*1.5) + "s ease-out forwards";
+          c.appendChild(d);
+          setTimeout(function(el){el.remove();}, 3000, d);
+        }
+      };
+      
+      utter.onend = function() {
+        anchorImg.style.animation = "";
+        idx++;
+        setTimeout(speakNext, 500);
+      };
+      
+      synth.speak(utter);
+    }
+    
+    // Tiny delay to allow voices to load
+    setTimeout(speakNext, 500);
+    
+  } else {
+    $("e2").textContent="Nope! Hint: she is the one who loves you most";
+  }
+};
 function pop(n){if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
   for(var i=0;i<n;i++){var s=document.createElement("i");s.className="pop";var z=12+Math.random()*16;s.style.width=s.style.height=z+"px";
     s.style.left=Math.random()*100+"vw";s.style.animationDuration=2+Math.random()*2.5+"s";document.body.appendChild(s);setTimeout(function(x){x.remove()},5000,s)}}
