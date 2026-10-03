@@ -580,11 +580,19 @@ $("un").onclick=function(){
     anchorImg.style.animation = "talkBounce 0.3s infinite";
     
     var synth = window.speechSynthesis;
-    // Attempt to pick a nice female voice if available
     var voices = synth.getVoices();
-    var voice = voices.find(function(v){ 
-      return v.name.includes("Samantha") || v.name.includes("Google US English") || v.name.includes("Google UK English Female") || v.name.includes("Zira") || v.name.includes("Female"); 
-    }) || voices[0];
+    
+    // Priority 1: Known soft female voices on iOS, Windows, Mac
+    var voice = voices.find(function(v){ return v.name.includes("Samantha") || v.name.includes("Victoria") || v.name.includes("Karen") || v.name.includes("Zira") || v.name.includes("Google UK English Female"); });
+    
+    // Priority 2: Any voice explicitly labeled 'Female'
+    if(!voice) voice = voices.find(function(v){ return v.name.toLowerCase().includes("female"); });
+    
+    // Priority 3: Google's default Android voice (usually a soft female)
+    if(!voice) voice = voices.find(function(v){ return v.name.includes("Google US English"); });
+    
+    // Priority 4: Any English voice as a last resort
+    if(!voice) voice = voices.find(function(v){ return v.lang.startsWith("en"); }) || voices[0];
     
     var idx = 0;
     function speakNext() {
@@ -598,9 +606,9 @@ $("un").onclick=function(){
       var utter = new SpeechSynthesisUtterance(newsScript[idx].t);
       if(voice) utter.voice = voice;
       
-      // Make it sound young and soft
-      utter.pitch = 1.25; 
-      utter.rate = 0.85; 
+      // Make it sound young and soft, but not like a chipmunk
+      utter.pitch = 1.15; 
+      utter.rate = 0.9; 
       
       $("tv-subs").textContent = newsScript[idx].t;
       $("tv-subs").style.display = "block";
