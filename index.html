@@ -612,9 +612,9 @@ $("un").onclick=function(){
       var utter = new SpeechSynthesisUtterance(newsScript[idx].t);
       if(voice) utter.voice = voice;
       
-      // Make it sound young and soft, but not like a chipmunk
-      utter.pitch = 1.15; 
-      utter.rate = 0.9; 
+      // Make it sound like a confident but sweet news anchor
+      utter.pitch = 1.05; 
+      utter.rate = 1.02; 
       
       $("tv-subs").textContent = newsScript[idx].t;
       $("tv-subs").style.display = "block";
