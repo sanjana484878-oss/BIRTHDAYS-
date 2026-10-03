@@ -104,6 +104,8 @@ svg{display:block;margin:auto}
 .bday-sub{font-size:2rem;animation:wordBounce .5s .4s cubic-bezier(.34,1.56,.64,1) both;opacity:0}
 .blast-em{position:fixed;pointer-events:none;font-size:1.8rem;animation:blastFly linear forwards;z-index:95}
 @keyframes blastFly{0%{opacity:1;transform:translateY(0) scale(1) rotate(0)}100%{opacity:0;transform:translateY(-80vh) scale(.3) rotate(720deg)}}
+.blast-explode{position:fixed;pointer-events:none;z-index:95;top:50%;left:50%;animation:blastExplode ease-in forwards}
+@keyframes blastExplode{0%{opacity:0;transform:translate(-50%,-50%) scale(0)} 15%{opacity:1;transform:translate(calc(-50% + var(--tx)),calc(-50% - 15vh)) scale(1) rotate(15deg)} 100%{opacity:0;transform:translate(calc(-50% + var(--tx)*1.5),100vh) scale(0.8) rotate(180deg)}}
 .cake-wrap{position:relative;display:inline-block}
 .sparkle-ring{position:absolute;inset:-20px;border-radius:50%;pointer-events:none}
 @keyframes ringPulse{0%{box-shadow:0 0 0 0 #c9475f55}70%{box-shadow:0 0 0 30px transparent}100%{box-shadow:0 0 0 0 transparent}}
@@ -391,10 +393,10 @@ b.onclick=function(){
   for(var i=0; i<25; i++) {
     setTimeout(function(){
       var t=document.createElement("div");
-      t.className="blast-em";
-      t.style.left=(Math.random()*70 + 15)+"vw";
-      t.style.bottom="-20px";
-      t.style.animationDuration=(8 + Math.random()*4)+"s";
+      t.className="blast-explode";
+      var spread = (Math.random() - 0.5) * 80;
+      t.style.setProperty("--tx", spread + "vw");
+      t.style.animationDuration=(3 + Math.random()*2)+"s";
       t.style.fontSize="1.3rem";
       t.style.fontWeight="900";
       t.style.color="#8d2646";
@@ -404,8 +406,8 @@ b.onclick=function(){
       t.style.borderRadius="20px";
       t.textContent=tags[Math.floor(Math.random()*tags.length)];
       document.body.appendChild(t);
-      setTimeout(function(){t.remove();}, 12000);
-    }, i*500);
+      setTimeout(function(){t.remove();}, 5000);
+    }, i*100);
   }
   for(var j=0; j<40; j++) {
     setTimeout(function(){
