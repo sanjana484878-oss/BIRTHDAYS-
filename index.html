@@ -658,10 +658,56 @@ function pop(n){if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
     s.style.left=Math.random()*100+"vw";s.style.animationDuration=2+Math.random()*2.5+"s";document.body.appendChild(s);setTimeout(function(x){x.remove()},5000,s)}}
 
 
-var TC=["My love 💕 must say 'you look beautiful' at least once a day, even in potato-sack clothes.","My heart 💖 will never say 'I told you so' (even when he is right).","Sanjana always has the absolute final say in choosing the movie. Appeals will be ignored 😄.","All arguments end with my darling 🥺 saying 'sorry' first. This is basic science.","Both parties agree to love each other forever. No returns, no exchanges, no refunds 💑."];
+var TC=[
+  "You should love and care for me throughout my life, no matter what the situation is.",
+  "You should never ignore me. I should always be the first priority in your life.",
+  "You should be with me when I'm hurt and when I'm sad.",
+  "You should tell me everything openly. Even the smallest things — don't hesitate to share them. I'll always listen with genuine curiosity and care, because you are the most important person in my life. And I promise to do the same for you. ❤️"
+];
 TC.forEach(function(t){var l=document.createElement("label");l.className="card tc";l.innerHTML="<input type='checkbox'><span>"+t+"</span>";$("tc").appendChild(l)});
-$("tc").onchange=function(){var n=$("tc").querySelectorAll("input:checked").length;
- $("tcr").textContent=n===TC.length?"Agreed! You are officially stuck with me forever. Muahaha.":n+" of "+TC.length+" accepted. Don't stop now, your life depends on it.";if(n===TC.length)pop(30)};
+
+var tncBtn = document.createElement("button");
+tncBtn.textContent = "I Promise & Agree ❤️";
+tncBtn.style.display = "none";
+tncBtn.style.marginTop = "15px";
+$("tcr").parentNode.insertBefore(tncBtn, $("tcr").nextSibling);
+
+$("tc").onchange=function(){
+  var n=$("tc").querySelectorAll("input:checked").length;
+  if(n===TC.length){
+    $("tcr").textContent="All conditions checked! Sign below to make it official.";
+    tncBtn.style.display = "inline-block";
+  } else {
+    $("tcr").textContent=n+" of "+TC.length+" accepted. Don't stop now!";
+    tncBtn.style.display = "none";
+  }
+};
+
+tncBtn.onclick = function() {
+  tncBtn.style.display = "none";
+  $("tcr").innerHTML = "<b style='color:var(--wine);font-size:1.3rem'>Thank you for being mine! I appreciate and love you more than words can say. 💞</b>";
+  
+  // Blast appreciation stickers
+  var emojis=["❤️","🥺","🥰","💞","✨","💍","💖","🫶","THANK YOU!","FOREVER","BLESSED"];
+  for(var i=0;i<60;i++){
+    (function(idx){
+      setTimeout(function(){
+        var e=document.createElement("div");
+        e.className="blast-em";
+        var txt = emojis[Math.floor(Math.random()*emojis.length)];
+        e.textContent=txt;
+        if(txt.length > 2) { e.style.fontFamily="sans-serif"; e.style.fontWeight="900"; e.style.color="var(--rose)"; e.style.background="#fff"; e.style.padding="2px 10px"; e.style.borderRadius="10px"; e.style.boxShadow="0 2px 8px rgba(0,0,0,0.2)"; }
+        e.style.left=Math.random()*100+"vw";
+        e.style.bottom="0";
+        var dur=1.5+Math.random()*2.5;
+        e.style.animationDuration=dur+"s";
+        e.style.fontSize=(1.2+Math.random()*1.5)+"rem";
+        document.body.appendChild(e);
+        setTimeout(function(){e.remove();},dur*1000+100);
+      },idx*40);
+    })(i);
+  }
+};
 
 var ST=[["22 Feb","The day we met","Our first meeting came with a lot of nervousness and confusion, as we stood at the beginning of a life-changing decision together.","The day we met.jpeg"],
  ["7 March","Our first date","Our first date together was a little awkward, a little nervous,I realize it was the beginning of something truly special.","Our first date.jpeg"],
