@@ -507,7 +507,7 @@ $("lv").onclick=function(){
   }
   li++;
 };
-$("env").onclick=function(){$("env").style.display="none";var l=$("let");l.textContent=CFG.letter;l.style.display="block"};
+$("env").onclick=function(){$("env").style.display="none";var l=$("let");l.innerHTML="<img src='letter.jpeg' style='width:100%; border-radius:8px; display:block;'>";l.style.display="block"; l.style.padding="0";};
 /* ===== CAKE MULTI-STEP ===== */
 var cakeStep=0;
 $("cake").onclick=function(){
