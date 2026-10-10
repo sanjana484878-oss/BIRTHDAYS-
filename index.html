@@ -380,8 +380,8 @@ svg{display:block;margin:auto}
 
 <section class="alt" id="s-surprise"><div class="in">
   <h2>One last surprise (Don't mess this up)</h2>
-  <div id="ask"><p>⌨️ Type her name in the box below and click Unlock! 🎁</p>
-    <input id="nm" aria-label="Her name" placeholder="Type 'Sanjana' here..."> <button id="un">Unlock</button>
+  <div id="ask"><p>⌨️ Type his name in the box below and click Unlock! 🎁</p>
+    <input id="nm" aria-label="His name" placeholder="Type 'Rohith' here..."> <button id="un">Unlock</button>
     <p id="e2" style="min-height:1.5em"></p></div>
   <div id="final" style="display:none; text-align:center; margin-top:20px;">
     <!-- Cute Animated Characters -->
@@ -637,13 +637,13 @@ window.playFinalSurprise = function() {
 };
 
 $("un").onclick=function(){
-  if($("nm").value.trim().toLowerCase()===CFG.her.toLowerCase()){
+  if($("nm").value.trim().toLowerCase()==="rohith"){
     $("ask").style.display="none";
     $("final").style.display="block";
     pop(30);
     playFinalSurprise();
   } else {
-    $("e2").textContent="Nope! Hint: she is the one who loves you most";
+    $("e2").textContent="Nope! Hint: it's the birthday boy's name!";
   }
 };
 function pop(n){if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
