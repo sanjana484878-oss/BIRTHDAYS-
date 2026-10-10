@@ -140,8 +140,6 @@ svg{display:block;margin:auto}
   <a class="nbub" href="#s-gallery" onclick="closeNav()"><span class="nbub-pill">📸 Our Gallery</span><span class="nbub-heart">📸</span></a>
   <a class="nbub" href="#s-memories" onclick="closeNav()"><span class="nbub-pill">🎬 Moving Memories</span><span class="nbub-heart">🎬</span></a>
 
-  <a class="nbub" href="#s-tnc" onclick="closeNav()"><span class="nbub-pill">📜 T&amp;C of Love</span><span class="nbub-heart">📜</span></a>
-
   <a class="nbub" href="#s-lovemeter" onclick="closeNav()"><span class="nbub-pill">❤️ Love-o-Meter</span><span class="nbub-heart">❤️</span></a>
 
   <a class="nbub" href="#s-movie" onclick="closeNav()"><span class="nbub-pill">🎥 Our Movie</span><span class="nbub-heart">🎥</span></a>
@@ -246,13 +244,6 @@ svg{display:block;margin:auto}
 </div></section>
 
 
-
-<section id="s-tnc"><div class="in">
-  <h2>Terms and Conditions of Being Engaged to Sanjana (No Refunds)</h2>
-  <p>✅ Check all the boxes below to agree! Nobody reads these, but you must agree, or else I'm keeping the ring.</p>
-  <div id="tc"></div>
-  <p id="tcr" style="font-weight:700;min-height:3em"></p>
-</div></section>
 
 <section class="alt" id="s-lovemeter"><div class="in">
   <h2>The Highly Scientific Love-o-Meter</h2>
@@ -386,38 +377,22 @@ svg{display:block;margin:auto}
   <div id="ask"><p>⌨️ Type her name in the box below and click Unlock! 🎁</p>
     <input id="nm" aria-label="Her name" placeholder="Type 'Sanjana' here..."> <button id="un">Unlock</button>
     <p id="e2" style="min-height:1.5em"></p></div>
-  <div id="final" style="display:none">
-    <div id="tv-frame" style="border:8px solid #222; border-bottom-width:16px; border-radius:12px; overflow:hidden; background:#000; position:relative; aspect-ratio:4/3; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
-      <!-- LIVE badge -->
-      <div style="position:absolute; top:12px; left:12px; background:#e62020; color:#fff; padding:3px 8px; font-weight:900; font-family:sans-serif; border-radius:4px; font-size:0.8rem; z-index:10; animation:flashLive 1.5s infinite; box-shadow:0 0 10px #e62020;">🔴 LIVE</div>
-      
-      <!-- Split Screen -->
-      <div style="display:flex; width:100%; height:calc(100% - 45px);">
-        <!-- Anchor -->
-        <div style="flex:1; border-right:4px solid #222; position:relative; overflow:hidden;">
-          <img id="tv-anchor" src="anchor.jpeg" style="width:100%; height:100%; object-fit:cover;">
-          <div style="position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,0.7); color:#fff; padding:3px 8px; font-size:0.75rem; border-radius:4px; font-weight:bold; font-family:sans-serif;">Anchor Sanjana</div>
-        </div>
-        <!-- Boy -->
-        <div style="flex:1; position:relative; overflow:hidden;">
-          <img src="Your_birthday_copy.jpeg" style="width:100%; height:100%; object-fit:cover;">
-          <div style="position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,0.7); color:#fff; padding:3px 8px; font-size:0.75rem; border-radius:4px; font-weight:bold; font-family:sans-serif;">Birthday Boy</div>
-        </div>
-      </div>
-      
-      <!-- Scrolling Ticker -->
-      <div style="position:absolute; bottom:0; left:0; right:0; height:45px; background:var(--rose); display:flex; align-items:center; overflow:hidden;">
-        <div style="background:#222; color:#fff; padding:0 12px; height:100%; display:flex; align-items:center; font-weight:900; font-family:sans-serif; font-size:0.9rem; z-index:2; border-right:2px solid #fff; position:relative;">BREAKING</div>
-        <div style="position:absolute; left:100%; white-space:nowrap; color:#fff; font-weight:700; font-family:sans-serif; font-size:1rem; animation:scrollTicker 12s linear infinite;">
-          LOCAL MAN TURNS ONE YEAR OLDER, STILL HANDSOME! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; More details coming in… cake is also involved. 🎂😂
-        </div>
-      </div>
-      
-      <!-- Subtitles (Captions just in case voice is low) -->
-      <div id="tv-subs" style="position:absolute; bottom:60px; left:10%; right:10%; text-align:center; background:rgba(0,0,0,0.8); color:yellow; font-family:sans-serif; font-weight:bold; font-size:1.1rem; padding:8px 12px; border-radius:8px; z-index:15; display:none; text-shadow:1px 1px 0 #000;"></div>
-      
-      <!-- Emojis Container -->
-      <div id="tv-emojis" style="position:absolute; inset:0; pointer-events:none; z-index:20; overflow:hidden;"></div>
+  <div id="final" style="display:none; text-align:center; margin-top:20px;">
+    <!-- Cute Animated Characters -->
+    <div id="cute-chars" style="opacity:0; transform:translateY(30px); transition:all 1.5s ease; position:relative;">
+      <img src="cute_bunny_bear_cake.png" style="width:100%; max-width:400px; border-radius:20px; box-shadow:0 15px 40px rgba(0,0,0,0.15);">
+      <div id="final-emojis" style="position:absolute; inset:0; pointer-events:none; z-index:20; overflow:hidden;"></div>
+    </div>
+    
+    <!-- Birthday Message Reveal -->
+    <div id="final-msg" style="opacity:0; transform:translateY(20px); transition:all 1.5s ease 0.8s; margin-top:25px;">
+      <h3 style="color:var(--wine); font-size:1.8rem; margin-bottom:10px;">Lots of love for you ❤️</h3>
+      <p style="color:var(--rose); font-size:1.3rem; font-weight:700;">Once again, Happy Birthday Baby! 🎉</p>
+    </div>
+    
+    <!-- Replay Option -->
+    <div id="replay-btn" style="opacity:0; transition:all 1s ease 2s; margin-top:30px;">
+      <button onclick="playFinalSurprise()" style="background:var(--rose); color:#fff; border:none; padding:12px 25px; border-radius:25px; font-size:1.1rem; font-weight:700; cursor:pointer; box-shadow:0 5px 15px rgba(0,0,0,0.2);">↺ Replay Surprise</button>
     </div>
   </div>
 </div></section>
@@ -609,93 +584,58 @@ function blastCelebration(){
     })(b);
   }
 }
+window.playFinalSurprise = function() {
+  var chars = $("cute-chars");
+  var msg = $("final-msg");
+  var btn = $("replay-btn");
+  var c = $("final-emojis");
+  
+  // Reset states
+  chars.style.opacity = "0";
+  chars.style.transform = "translateY(30px)";
+  msg.style.opacity = "0";
+  msg.style.transform = "translateY(20px)";
+  btn.style.opacity = "0";
+  c.innerHTML = "";
+  
+  // Trigger animation flow
+  setTimeout(function() {
+    chars.style.opacity = "1";
+    chars.style.transform = "translateY(0)";
+    
+    // Heart and Confetti blast
+    var emojis = ["❤️", "💖", "💕", "🎉", "🎊", "✨", "🎂"];
+    for(var i=0; i<40; i++) {
+      var d = document.createElement("div");
+      d.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      d.style.position = "absolute";
+      d.style.fontSize = (1.5 + Math.random()*2.5) + "rem";
+      d.style.left = (Math.random()*90) + "%";
+      d.style.bottom = "-50px";
+      d.style.animation = "tvEmojiFly " + (1.5 + Math.random()*2) + "s ease-out forwards";
+      c.appendChild(d);
+    }
+  }, 100);
+  
+  // Message Reveal
+  setTimeout(function() {
+    msg.style.opacity = "1";
+    msg.style.transform = "translateY(0)";
+    if(typeof blastCelebration === "function") blastCelebration();
+  }, 1500);
+  
+  // Show replay button
+  setTimeout(function() {
+    btn.style.opacity = "1";
+  }, 3500);
+};
+
 $("un").onclick=function(){
   if($("nm").value.trim().toLowerCase()===CFG.her.toLowerCase()){
     $("ask").style.display="none";
     $("final").style.display="block";
-    pop(50);
-    
-    // Setup News Script
-    var newsScript = [
-      { t: "Good evening, I’m Sanjana, reporting live with some very important news. Today, a very special man has officially completed another year of his life. Yes… it’s his birthday.", e: "🎂" },
-      { t: "We’re still trying to understand how he keeps getting older while somehow looking exactly the same. But honestly… I’m not complaining.", e: "😄" },
-      { t: "We also spoke to people close to him, and they confirmed that he is funny, caring, and extremely good at making one particular girl smile. That girl would be me, by the way.", e: "😂" },
-      { t: "After a very serious investigation, I can confirm that I love this man very, very much. So, unfortunately for him… he’s stuck with me.", e: "😂" },
-      { t: "Happy Birthday, my love. I hope you get everything you wished for today… although I’m pretty sure what you really want is cake and my attention. Luckily for you… you’re getting both.", e: "🎂" },
-      { t: "This is Sanjana, signing off from the birthday scene. Back to you… and happy birthday, handsome.", e: "💋" }
-    ];
-    
-    var bgm = $("bgmusic");
-    var wasPlaying = !bgm.paused;
-    if(wasPlaying) bgm.pause();
-    
-    var anchorImg = $("tv-anchor");
-    anchorImg.style.animation = "talkBounce 0.3s infinite";
-    
-    var synth = window.speechSynthesis;
-    var voices = globalVoices.length > 0 ? globalVoices : synth.getVoices();
-    
-    // Priority 1: Known soft female voices on iOS, Windows, Mac
-    var voice = voices.find(function(v){ return v.name.includes("Samantha") || v.name.includes("Victoria") || v.name.includes("Karen") || v.name.includes("Zira") || v.name.includes("Google UK English Female"); });
-    
-    // Priority 2: Any voice explicitly labeled 'Female'
-    if(!voice) voice = voices.find(function(v){ return v.name.toLowerCase().includes("female"); });
-    
-    // Priority 3: Google's default Android voice (usually a soft female)
-    if(!voice) voice = voices.find(function(v){ return v.name.includes("Google US English"); });
-    
-    // Priority 4: Any English voice as a last resort
-    if(!voice) voice = voices.find(function(v){ return v.lang.startsWith("en"); }) || voices[0];
-    
-    var idx = 0;
-    function speakNext() {
-      if(idx >= newsScript.length) {
-        anchorImg.style.animation = "";
-        if(wasPlaying) bgm.play();
-        if(typeof blastCelebration === "function") blastCelebration();
-        return;
-      }
-      
-      var utter = new SpeechSynthesisUtterance(newsScript[idx].t);
-      if(voice) utter.voice = voice;
-      
-      // Make it sound like a confident but sweet news anchor
-      utter.pitch = 1.05; 
-      utter.rate = 1.02; 
-      
-      $("tv-subs").textContent = newsScript[idx].t;
-      $("tv-subs").style.display = "block";
-      
-      utter.onstart = function() {
-        anchorImg.style.animation = "talkBounce 0.3s infinite";
-        
-        // Blast specific emojis
-        var c = $("tv-emojis");
-        for(var i=0; i<8; i++) {
-          var d = document.createElement("div");
-          d.textContent = newsScript[idx].e;
-          d.style.position = "absolute";
-          d.style.fontSize = "2.5rem";
-          d.style.left = (Math.random()*80 + 10) + "%";
-          d.style.bottom = "-50px";
-          d.style.animation = "tvEmojiFly " + (1.5+Math.random()*1.5) + "s ease-out forwards";
-          c.appendChild(d);
-          setTimeout(function(el){el.remove();}, 3000, d);
-        }
-      };
-      
-      utter.onend = function() {
-        anchorImg.style.animation = "";
-        idx++;
-        setTimeout(speakNext, 500);
-      };
-      
-      synth.speak(utter);
-    }
-    
-    // Tiny delay to allow voices to load
-    setTimeout(speakNext, 500);
-    
+    pop(30);
+    playFinalSurprise();
   } else {
     $("e2").textContent="Nope! Hint: she is the one who loves you most";
   }
@@ -703,58 +643,6 @@ $("un").onclick=function(){
 function pop(n){if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
   for(var i=0;i<n;i++){var s=document.createElement("i");s.className="pop";var z=12+Math.random()*16;s.style.width=s.style.height=z+"px";
     s.style.left=Math.random()*100+"vw";s.style.animationDuration=2+Math.random()*2.5+"s";document.body.appendChild(s);setTimeout(function(x){x.remove()},5000,s)}}
-
-
-var TC=[
-  "You should love and care for me throughout my life, no matter what the situation is.",
-  "You should never ignore me. I should always be the first priority in your life.",
-  "You should be with me when I'm hurt and when I'm sad.",
-  "You should tell me everything openly. Even the smallest things — don't hesitate to share them. I'll always listen with genuine curiosity and care, because you are the most important person in my life. And I promise to do the same for you. ❤️"
-];
-TC.forEach(function(t){var l=document.createElement("label");l.className="card tc";l.innerHTML="<input type='checkbox'><span>"+t+"</span>";$("tc").appendChild(l)});
-
-var tncBtn = document.createElement("button");
-tncBtn.textContent = "I Promise & Agree ❤️";
-tncBtn.style.display = "none";
-tncBtn.style.marginTop = "15px";
-$("tcr").parentNode.insertBefore(tncBtn, $("tcr").nextSibling);
-
-$("tc").onchange=function(){
-  var n=$("tc").querySelectorAll("input:checked").length;
-  if(n===TC.length){
-    $("tcr").textContent="All conditions checked! Sign below to make it official.";
-    tncBtn.style.display = "inline-block";
-  } else {
-    $("tcr").textContent=n+" of "+TC.length+" accepted. Don't stop now!";
-    tncBtn.style.display = "none";
-  }
-};
-
-tncBtn.onclick = function() {
-  tncBtn.style.display = "none";
-  $("tcr").innerHTML = "<b style='color:var(--wine);font-size:1.3rem'>Thank you for being mine! I appreciate and love you more than words can say. 💞</b>";
-  
-  // Blast appreciation stickers
-  var emojis=["❤️","🥺","🥰","💞","✨","💍","💖","🫶","THANK YOU!","FOREVER","BLESSED"];
-  for(var i=0;i<60;i++){
-    (function(idx){
-      setTimeout(function(){
-        var e=document.createElement("div");
-        e.className="blast-em";
-        var txt = emojis[Math.floor(Math.random()*emojis.length)];
-        e.textContent=txt;
-        if(txt.length > 2) { e.style.fontFamily="sans-serif"; e.style.fontWeight="900"; e.style.color="var(--rose)"; e.style.background="#fff"; e.style.padding="2px 10px"; e.style.borderRadius="10px"; e.style.boxShadow="0 2px 8px rgba(0,0,0,0.2)"; }
-        e.style.left=Math.random()*100+"vw";
-        e.style.bottom="0";
-        var dur=1.5+Math.random()*2.5;
-        e.style.animationDuration=dur+"s";
-        e.style.fontSize=(1.2+Math.random()*1.5)+"rem";
-        document.body.appendChild(e);
-        setTimeout(function(){e.remove();},dur*1000+100);
-      },idx*40);
-    })(i);
-  }
-};
 
 var ST=[["22 Feb","The day we met","Our first meeting came with a lot of nervousness and confusion, as we stood at the beginning of a life-changing decision together.","The day we met.jpeg"],
  ["7 March","Our first date","Our first date together was a little awkward, a little nervous,I realize it was the beginning of something truly special.","Our first date.jpeg"],
