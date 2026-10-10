@@ -134,8 +134,9 @@ svg{display:block;margin:auto}
 <div id="navoverlay" onclick="closeNav()"></div>
 <div id="navmenu">
   <a class="nbub" href="#s-loading" onclick="closeNav()"><span class="nbub-pill">🎂 Birthday</span><span class="nbub-heart">🎂</span></a>
-  <a class="nbub" href="#s-story" onclick="closeNav()"><span class="nbub-pill">📖 Our Story</span><span class="nbub-heart">📖</span></a>
+  <a class="nbub" href="#s-bdy" onclick="closeNav()"><span class="nbub-pill">🎁 30th Surprise</span><span class="nbub-heart">🎁</span></a>
   <a class="nbub" href="#s-balloons" onclick="closeNav()"><span class="nbub-pill">🎈 Memory Balloons</span><span class="nbub-heart">🎈</span></a>
+  <a class="nbub" href="#s-story" onclick="closeNav()"><span class="nbub-pill">📖 Our Story</span><span class="nbub-heart">📖</span></a>
   <a class="nbub" href="#s-gallery" onclick="closeNav()"><span class="nbub-pill">📸 Our Gallery</span><span class="nbub-heart">📸</span></a>
   <a class="nbub" href="#s-memories" onclick="closeNav()"><span class="nbub-pill">🎬 Moving Memories</span><span class="nbub-heart">🎬</span></a>
 
@@ -170,10 +171,30 @@ svg{display:block;margin:auto}
   <p><small>Almost done (Checking if you were annoying today...)</small></p>
 </div></section>
 
-<section id="s-story"><div class="in">
-  <h2>Our Story</h2>
-  <p>From hello to forever, so far. (And all the arguments about what to eat in between.)</p>
-  <div class="tl" id="tl"></div>
+<section id="s-bdy"><div class="in">
+  <h2>A Special Surprise</h2>
+  <p>🎁 Tap the purple ribbon to unwrap it! ✨</p>
+  <div id="bdy-wrapper" style="position:relative; width:100%; border-radius:16px; overflow:hidden; background:#d8c9ff; padding:20px; box-shadow:0 10px 30px rgba(0,0,0,0.3); text-align:left; display:flex; flex-direction:column; gap:20px; font-family:'Quicksand', sans-serif;">
+    
+    <!-- The Ribbon Overlay -->
+    <div id="bdy-ribbon" style="position:absolute; inset:0; background:rgba(0,0,0,0.6); z-index:10; display:flex; flex-direction:column; align-items:center; justify-content:center; backdrop-filter:blur(4px); transition:opacity 0.8s;">
+      <div style="background:var(--wine); color:#fff; font-weight:900; font-size:3rem; padding:10px 40px; border:4px dashed var(--gold); border-radius:10px; cursor:pointer; box-shadow:0 10px 30px rgba(0,0,0,0.5); transform:rotate(-5deg);" onclick="openBdy()">30th</div>
+      <p style="color:#fff; font-weight:700; margin-top:15px; font-size:1.2rem; text-shadow:0 2px 4px #000;">Tap to untie!</p>
+    </div>
+
+    <!-- The Polaroid -->
+    <div style="background:#fff; padding:15px 15px 45px 15px; border-radius:4px; box-shadow:0 5px 15px rgba(0,0,0,0.2); transform:rotate(-3deg); margin:0 auto; width:100%; max-width:320px;">
+      <img src="bdy_section.jpeg" style="width:100%; border-radius:4px; border:2px solid #eee;">
+    </div>
+    
+    <!-- The Text Content -->
+    <div id="bdy-text" style="color:var(--wine); font-weight:700; font-size:1.1rem; line-height:1.5; text-align:center; opacity:0; transition:opacity 1.5s;">
+      Happy birthday to my favourite person! ❤️<br><br>
+      I hope this year brings you everything you've been wishing for and so much more.<br><br>
+      Here's to you, your dreams, and all the happiness you deserve.<br><br>
+      Happy birthday, my love. I love you more than you know. 🎂🤍
+    </div>
+  </div>
 </div></section>
 
 <section class="alt" id="s-balloons"><div class="in">
@@ -181,6 +202,12 @@ svg{display:block;margin:auto}
   <p>👆 Tap a balloon below to pop it! 🎈 No refunds if you cry. (I already have screenshots of your ugly crying face anyway.)</p>
   <div class="bal" id="bal"></div>
   <div class="card" id="mem" style="display:none"></div>
+</div></section>
+
+<section id="s-story"><div class="in">
+  <h2>Our Story</h2>
+  <p>From hello to forever, so far. (And all the arguments about what to eat in between.)</p>
+  <div class="tl" id="tl"></div>
 </div></section>
 
 <section id="s-gallery"><div class="in">
@@ -779,5 +806,35 @@ $("muteBtn").onclick = function(){
   var mus=$("bgmusic");
   if(mus.paused) { mus.play(); } else { mus.pause(); }
   $("muteBtn").innerHTML=mus.paused?"🔇":"🎵";
+};
+window.openBdy = function() {
+  var rib = $("bdy-ribbon");
+  if(!rib) return;
+  rib.style.opacity = "0";
+  setTimeout(function(){ rib.style.display="none"; }, 800);
+  
+  setTimeout(function(){
+    $("bdy-text").style.opacity = "1";
+  }, 500);
+
+  var emojis=["Happy Birthday!","I Love You!","❤️","🎂","✨","🎉","🥰"];
+  for(var i=0;i<40;i++){
+    (function(idx){
+      setTimeout(function(){
+        var e=document.createElement("div");
+        e.className="blast-em";
+        var txt = emojis[Math.floor(Math.random()*emojis.length)];
+        e.textContent=txt;
+        if(txt.length > 2) { e.style.fontFamily="Dancing Script,cursive"; e.style.fontWeight="900"; e.style.color="var(--wine)"; e.style.textShadow="0 2px 10px #fff"; }
+        e.style.left=Math.random()*100+"vw";
+        e.style.bottom="0";
+        var dur=1.5+Math.random()*2.5;
+        e.style.animationDuration=dur+"s";
+        e.style.fontSize=(1.5+Math.random()*2)+"rem";
+        document.body.appendChild(e);
+        setTimeout(function(){e.remove();},dur*1000+100);
+      },idx*60);
+    })(i);
+  }
 };
 </script></body></html>
